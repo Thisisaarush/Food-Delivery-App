@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FlatList, Pressable } from "react-native";
 import styled from "styled-components/native";
 import { ActivityIndicator, Colors } from "react-native-paper";
@@ -6,14 +6,18 @@ import { ActivityIndicator, Colors } from "react-native-paper";
 // components
 import { SearchBar } from "../../components/SearchBar/SearchBar.component";
 import RestaurantInfoCard from "../../components/RestaurantInfoCard/RestaurantInfoCard.component";
+import { FavouritesBar } from "../../components/FavouritesBar/FavouritesBar.component";
 
 // context
 import { RestaurantsContext } from "../../services/Restaurants/Restaurants.context";
+import { FavouritesContext } from "../../services/Favourites/Favourites.context";
 
 const RestaurantsScreen = ({ navigation: { navigate } }) => {
   const restaurantContext = useContext(RestaurantsContext);
-
+  const { favourites } = useContext(FavouritesContext);
   const { restaurants, isLoading } = restaurantContext;
+  const [isToggled, setIsToggled] = useState(false);
+
   return (
     <RestaurantScreenContainer>
       {isLoading && (
@@ -26,7 +30,11 @@ const RestaurantsScreen = ({ navigation: { navigate } }) => {
           />
         </LoadingContainer>
       )}
-      <SearchBar />
+      <SearchBar
+        onFavouritesToggled={() => setIsToggled(!isToggled)}
+        isFavouritesToggled={isToggled}
+      />
+      {isToggled && <FavouritesBar favourites={favourites} onNavigate={navigate} />}
       <FlatList
         data={restaurants}
         renderItem={({ item }) => (

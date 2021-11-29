@@ -18,6 +18,9 @@ import { SvgXml } from "react-native-svg";
 import starIcon from "../../../assets/starIcon";
 import openIcon from "../../../assets/openIcon";
 
+// components
+import { Favourite } from "../Favourite/Favourite.component";
+
 const RestaurantInfoCard = ({ restaurant = {} }) => {
   const { name, photos, address, isOpenNow, rating, placeId } = restaurant;
 
@@ -25,6 +28,7 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <CardStyled elevation={5}>
+      <Favourite restaurant={restaurant} />
       <RestaurantImage source={{ uri: photos[0] }} />
       <RestaurantName>{name}</RestaurantName>
       <LabelContainer>

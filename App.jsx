@@ -25,6 +25,7 @@ import { SafeAreaViewStyled } from "./src/globalStyles/GlobalStyles";
 // context
 import { RestaurantContextProvider } from "./src/services/Restaurants/Restaurants.context";
 import { LocationContextProvider } from "./src/services/Location/Location.context";
+import { FavouritesContextProvider } from "./src/services/Favourites/Favourites.context";
 
 // components
 import Navigation from "./src/components/Navigation/Navigation.component";
@@ -48,14 +49,16 @@ export default function App() {
 
   return (
     <ThemeProvider theme={Theme}>
-      <LocationContextProvider>
-        <RestaurantContextProvider>
-          <SafeAreaViewStyled>
-            <Navigation />
-            <ExpoStatusBar style="auto" />
-          </SafeAreaViewStyled>
-        </RestaurantContextProvider>
-      </LocationContextProvider>
+      <FavouritesContextProvider>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
+            <SafeAreaViewStyled>
+              <Navigation />
+              <ExpoStatusBar style="auto" />
+            </SafeAreaViewStyled>
+          </RestaurantContextProvider>
+        </LocationContextProvider>
+      </FavouritesContextProvider>
     </ThemeProvider>
   );
 }
