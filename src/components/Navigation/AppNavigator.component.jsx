@@ -6,7 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 // navigators
 import RestaurantsNavigator from "./RestaurantsNavigator";
 import MapScreen from "../../screens/MapScreen/MapScreen";
-import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
+import { SettingsNavigator } from "./SettingsNavigator.component";
 
 const AppNavigator = () => {
   // navigation
@@ -46,7 +46,7 @@ const AppNavigator = () => {
         />
         <Tab.Screen
           name="Profile"
-          component={ProfileScreen}
+          component={SettingsNavigator}
           options={{ headerShown: false }}
         />
       </Tab.Navigator>
